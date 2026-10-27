@@ -1,0 +1,40 @@
+{
+  "name": "dsh-prompt-enhance",
+  "version": "0.1.0",
+  "description": "增强提示词：在 dsh 聊天输入区用一次轻量 LLM 调用把原始需求改写为更可执行的提示词并回填。",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/config.js",
+    "lib/prompt.js",
+    "lib/rewrite.js",
+    "lib/index.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "HANDOFF.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "skill/SKILL.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,28 @@
+# Prompt Enhance bundle patch.
+#
+# One row, two halves: `dsh-prompt-enhance` is a Host plugin (registers the two
+# `/api/prompt-enhance/*` routes through `ctx.webServer` and calls `ctx.llm`)
+# and a web client plugin (package.json `dsh.client` is scanned by
+# `dsh-client-modules`, so `./client` reaches the browser). Neither half needs
+# a second entry.
+#
+# Config field reference (all optional; defaults shown):
+#   provider / model    model route for the rewrite; omit both to use the
+#                       composition's current `agentDefaultModel` selection
+#   timeoutMs: 20000    wall-clock budget for one rewrite
+#   maxInputLength: 4000  accepted input characters (code points)
+#   maxOutputTokens: 1200 output budget for the rewrite
+#   temperature: 0.2    sampling temperature
+#   enableButton: true  render the composer button
+#
+# The user's own patch layer (profile `cordis.patch.yml`) overrides any of these
+# by id, which is why this file ships defaults and nothing deployment-specific.
+- insert:
+    - id: prompt-enhance
+      name: dsh-prompt-enhance
+      config:
+        timeoutMs: 20000
+        maxInputLength: 4000
+        maxOutputTokens: 1200
+        temperature: 0.2
+        enableButton: true
